@@ -15,8 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from users import views as user_views       #importing views from the 'user' app
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('forum.urls')),    # the localhost will redirect to the forum app urls
+    path('register/', user_views.register, name='register'),    #the localhost will directly access the 'views.py' in the 'users' app
+    path('', include('forum.urls')),                            #the localhost will redirect to the 'forum' app urls
 ]

@@ -10,3 +10,9 @@ def boards(request):
 
 def about(request):
     return render(request, 'forum/about.html', context={'title':'About'})   #request to render the about.html file and sends the context
+
+def topics(request):
+    context = {
+        #need to implement
+    }
+    return render(request, 'forum/topics.html', context)

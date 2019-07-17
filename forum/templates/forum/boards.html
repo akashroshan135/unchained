@@ -1,13 +1,17 @@
 {% extends "forum/base.html" %}
+
+{% block heading %}
+<ol class="breadcrumb my-4">
+  <li class="breadcrumb-item active">Boards</li>      
+</ol>
+{% endblock %}
+
 {% block content %}
 <div class="container">
-  <ol class="breadcrumb my-4">
-    <li class="breadcrumb-item active">Boards</li>
-  </ol>
   <table class="table">
     <thead class="thead-inverse">
       <tr>
-        <th>Board</th>
+        <th>Board Name</th>
         <th>Posts</th>
         <th>Topics</th>
         <th>Last Post</th>
@@ -17,7 +21,7 @@
       {% for board in boards %}
         <tr>
           <td>
-            {{ board.name }}
+            <a href="{% url 'forum-board' %}">{{ board.name }}</a>
             <small class="text-muted d-block">{{ board.description }}</small>
           </td>
           <td class="align-middle">0</td>

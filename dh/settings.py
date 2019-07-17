@@ -38,7 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'forum.apps.ForumConfig' # includes the installed app 'forum'
+    'forum.apps.ForumConfig', # includes the installed app 'forum'
+    'users.apps.UsersConfig', # includes the installed app 'users'
+    'crispy_forms',           # uses crispy forms to modify display of the register page. Refer to the 'register.html' in 'users' app to see how to use
+
 ]
 
 MIDDLEWARE = [
@@ -120,3 +123,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4' #bootstrap template crispy uses
