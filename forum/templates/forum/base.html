@@ -1,4 +1,4 @@
-{% load static %}
+{% load static %} <!-- Used to load css and other static data -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,17 +11,14 @@
 
     <link rel="stylesheet" type="text/css" href="{% static 'forum/main.css' %}">
 
-    {% if title %}
-        <title>{% block title %}Add website name here{% endblock %}</title>
-    {% else %}
-        <title>Add website name here</title>
-    {% endif %}
+    <title>Unchained - {% block title %}Title Missing{% endblock %}</title>
+
 </head>
 <body>
     <header class="site-header">
     <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
         <div class="container">
-        <a class="navbar-brand mr-4" href="{% url 'forum-board' %}">Add Website name here</a>
+        <a class="navbar-brand mr-4" href="#">Unchained</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
         </button>
@@ -34,9 +31,16 @@
             </div>
             <!-- Navbar Right Side -->
             <div class="navbar-nav">
-            <a class="nav-item nav-link" href="{% url 'admin:index' %}">Admin Login</a>
-            <a class="nav-item nav-link" href="#">Login</a>
-            <a class="nav-item nav-link" href="{% url 'register' %}">Register</a>
+            {% if user.is_authenticated %}
+                <a class="nav-item nav-link" href="{% url 'profile' %}">{{ user.username }}</a>
+                {% if request.user.is_superuser %}
+                    <a class="nav-item nav-link" href="{% url 'admin:index' %}">Admin Page</a>
+                {% endif %}
+                <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
+            {% else %}
+                <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
+                <a class="nav-item nav-link" href="{% url 'register' %}">Register</a>
+            {% endif %}
             </div>
         </div>
         </div>

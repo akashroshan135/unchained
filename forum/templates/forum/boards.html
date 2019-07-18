@@ -1,35 +1,39 @@
 {% extends "forum/base.html" %}
 
+{% block title %}
+  Boards
+{% endblock %}
+
 {% block heading %}
-<ol class="breadcrumb my-4">
-  <li class="breadcrumb-item active">Boards</li>      
-</ol>
+  <ol class="breadcrumb my-4">
+    <li class="breadcrumb-item active">Boards</li>      
+  </ol>
 {% endblock %}
 
 {% block content %}
-<div class="container">
-  <table class="table">
-    <thead class="thead-inverse">
-      <tr>
-        <th>Board Name</th>
-        <th>Posts</th>
-        <th>Topics</th>
-        <th>Last Post</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for board in boards %}
+  <div class="container">
+    <table class="table">
+      <thead class="thead-inverse">
         <tr>
-          <td>
-            <a href="{% url 'forum-board' %}">{{ board.name }}</a>
-            <small class="text-muted d-block">{{ board.description }}</small>
-          </td>
-          <td class="align-middle">0</td>
-          <td class="align-middle">0</td>
-          <td></td>
+          <th>Board Name</th>
+          <th>Posts</th>
+          <th>Topics</th>
+          <th>Last Post</th>
         </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-</div>
+      </thead>
+      <tbody>
+        {% for board in boards %}
+          <tr>
+            <td>
+              <a href="{% url 'forum-board' board.pk %}">{{ board.name }}</a> <!--sends the primary key of the board-->
+              <small class="text-muted d-block">{{ board.description }}</small>
+            </td>
+            <td class="align-middle">0</td>
+            <td class="align-middle">0</td>
+            <td></td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
 {% endblock content %}

@@ -125,3 +125,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4' #bootstrap template crispy uses
+
+LOGIN_REDIRECT_URL = 'forum-home'   #sets the login redirect to the 'forum-home' page after login. May change to homepage after it is created
+
+LOGIN_URL = 'login'                 #sets the 'login' page as default when user tries to illegally access profile or other hidden pages

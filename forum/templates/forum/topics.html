@@ -1,15 +1,40 @@
 {% extends 'forum/base.html' %}
 
 {% block title %}
-    <!--need to change for proper implementation-->
-  {{ board.name }} - {{ block.super }}
+  {{ board.name }}
 {% endblock %}
 
-{% block breadcrumb %}
-  <li class="breadcrumb-item"><a href="{% url 'forum-home' %}">Boards</a></li>
-  <li class="breadcrumb-item active">{{ board.name }}</li>
+{% block heading %}
+  <ol class="breadcrumb my-4">
+    <li class="breadcrumb-item active">
+      <a href="{% url 'forum-home' %}">Boards</a> / {{ board.name }}
+    </li>      
+</ol>
+</h2>
 {% endblock %}
 
 {% block content %}
-    <!-- just leaving it empty for now. we will add core here soon. -->
+  <div class="container">
+  <table class="table">
+    <thead class="thead-inverse">
+      <tr>
+        <th>Topic Name</th>
+        <th>Posts</th>
+        <th>Last Post</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for topic in topics %}
+        <tr>
+          <td>
+            <a href="#">{{ topic.name }}</a>
+            <small class="text-muted d-block">{{ topic.created_user }}</small>
+          </td>
+          <td class="align-middle">0</td>
+          <td></td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
 {% endblock %}
