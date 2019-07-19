@@ -1,6 +1,14 @@
 {% extends "forum/base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
+    {% if user.is_authenticated %}
+    <h2>You are already logged in!</h2>
+    <div class="border-top pt-3">
+    <ol class="breadcrumb my-4">
+        <li class="breadcrumb-item active"><a href="{% url 'profile' %}">Visit your profile page</a></li>      
+    </ol>
+    </div>
+    {% else %}
     <div class="content-section">
         <form method="POST">
             {% csrf_token %}
@@ -18,4 +26,5 @@
             </small>
         </div>
     </div>
+    {% endif %}
 {% endblock content %}

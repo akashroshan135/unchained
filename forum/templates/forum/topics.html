@@ -1,19 +1,34 @@
 {% extends 'forum/base.html' %}
 
 {% block title %}
-  {{ board.name }}
+  {{ forum.name }}
 {% endblock %}
 
 {% block heading %}
+  {% if request.user.is_authenticated %}
   <ol class="breadcrumb my-4">
     <li class="breadcrumb-item active">
-      <a href="{% url 'forum-home' %}">Boards</a> / {{ board.name }}
+      <a href="{% url 'forum-list' %}">Forums</a> / {{ forum.name }}
     </li>      
-</ol>
-</h2>
+  </ol>
+  {% else %}
+    <h3>
+    <div class="pt-3">
+        <small>
+          You have to be logged in to access the forums!<a class="ml-2" href="{% url 'login' %}">Sign In</a>
+        </small>
+    </div>
+    </h3>
+    <div class="border-top pt-3">
+      <small class="text-muted">
+        Don't Have An Account?<a class="ml-2" href="{% url 'register' %}">Sign Up</a>
+      </small>
+    </div>
+    </div>
+    {% endif %}
 {% endblock %}
 
-{% block content %}
+{% block content %} {% if request.user.is_authenticated %}
   <div class="container">
   <table class="table">
     <thead class="thead-inverse">
@@ -37,4 +52,4 @@
     </tbody>
   </table>
 </div>
-{% endblock %}
+{% endif %} {% endblock %}

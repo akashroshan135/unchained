@@ -7,7 +7,7 @@ def get_sentinel_user():
     return get_user_model().objects.get_or_create(username='deleted')[0]
 
 #contains the boards
-class Board(models.Model):
+class Forum(models.Model):
     name = models.CharField(max_length=30, unique=True)
     description = models.CharField(max_length=100)
     
@@ -18,8 +18,11 @@ class Board(models.Model):
 class Topic(models.Model):      
     subject = models.CharField(max_length=255)
     last_updated = models.DateTimeField(auto_now_add=True)
-    board = models.ForeignKey(Board, on_delete = models.CASCADE, related_name='topics')                         #attaches the Board table as a foreign key. models.CASCADE deletes the topic when the board is deleted
+    forum = models.ForeignKey(Forum, on_delete = models.CASCADE, related_name='topics')                         #attaches the Board table as a foreign key. models.CASCADE deletes the topic when the board is deleted
     created_user = models.ForeignKey(User, on_delete = models.SET(get_sentinel_user), related_name='topics')    #attaches the User table as a foreign key. models.SET sets the user to 'deleted' to keep the post even after the user account is deleted
+
+    def __str__(self):          #returns the name of the board to display in the database
+        return self.name
 
 #contains the posts. Need to be implemented
 class Post(models.Model):
