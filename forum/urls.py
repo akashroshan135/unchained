@@ -4,12 +4,12 @@ from . import views
 
 urlpatterns = [
     path('', views.home, name = 'home'),
-    path('about/', views.about, name = 'about'),                                    #the about funcition in the urls.py is viewed when localhost url path is followed by /about
+    path('about/', views.about, name = 'about'),                                    #the about function in the urls.py is viewed when localhost url path is followed by /about
 
-    path('forum/', views.forum, name = 'forum-list'),                               #the boards funcition in the urls.py is viewed when localhost url path is empty
-    path('forum/<pk>/', views.forum_topics, name='forum-topics'),                    #the board_topics funcition in the urls.py is viewed when localhost url path is followed by /board/<id>.
-    path('forum/<pk>/new', views.forum_topics, name='forum-topics-new'),                 #the board_topics funcition in the urls.py is viewed when localhost url path is followed by /board/<id>.
+    path('forum/', views.forum, name = 'forum-list'),                               #the forum function in the urls.py is viewed when localhost url path is empty
+    path('forum/<pk>/', views.forum_threads, name='forum-threads'),                 #the forum_threads function in the urls.py is viewed when localhost url path is followed by /forum/<id>.
+    path('forum/<pk>/new', views.new_thread, name='forum-threads-new'),             #the new_thread function in the urls.py is viewed when localhost url path is followed by /forum/<id>/new.
 
-    #url(r'^forum/(?P<pk>\d+)/$', views.board_topics, name='forum-board'),          #the board_topics funcition in the urls.py is viewed when localhost url path is followed by /board/<id>.
+    #url(r'^forum/(?P<pk>\d+)/$', views.forum_threads, name='forum-forum'),         #the forum_threads function in the urls.py is viewed when localhost url path is followed by /forum/<id>.
 
 ]

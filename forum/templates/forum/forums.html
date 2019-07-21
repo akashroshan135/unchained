@@ -17,7 +17,7 @@
         <tr>
           <th>Forum Name</th>
           <th>Posts</th>
-          <th>Topics</th>
+          <th>Threads</th>
           <th>Last Post</th>
         </tr>
       </thead>
@@ -25,7 +25,7 @@
         {% for forum in forums %}
           <tr>
             <td>
-              <a href="{% url 'forum-topics' forum.pk %}">{{ forum.name }}</a> <!--sends the primary key of the board-->
+              <a href="{% url 'forum-threads' forum.pk %}">{{ forum.name }}</a> <!--sends the primary key of the board-->
               <small class="text-muted d-block">{{ forum.description }}</small>
             </td>
             <td class="align-middle">0</td>

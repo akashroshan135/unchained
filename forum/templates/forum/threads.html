@@ -1,0 +1,42 @@
+{% extends 'forum/base.html' %}
+
+{% block title %}
+  {{ forum.name }}
+{% endblock %}
+
+{% block heading %}
+  <ol class="breadcrumb my-4">
+    <li class="breadcrumb-item active">
+      <a href="{% url 'forum-list' %}">Forums</a> / {{ forum.name }}
+    </li>      
+  </ol> 
+  <div class="mb-4">
+    <a href="{% url 'forum-threads-new' forum.pk %}" class="btn btn-primary">New topic</a>
+  </div>
+{% endblock %}
+
+{% block content %}
+  <div class="container">
+  <table class="table">
+    <thead class="thead-inverse">
+      <tr>
+        <th>Thread Name</th>
+        <th>Posts</th>
+        <th>Last Post</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for thread in threads %}
+        <tr>
+          <td>
+            <a href="#">{{ thread.name }}</a>
+            <small class="text-muted d-block">{{ thread.created_user }}</small>
+          </td>
+          <td class="align-middle">0</td>
+          <td></td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
