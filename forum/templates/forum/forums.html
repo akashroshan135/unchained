@@ -25,11 +25,11 @@
         {% for forum in forums %}
           <tr>
             <td>
-              <a href="{% url 'forum-threads' forum.pk %}">{{ forum.name }}</a> <!--sends the primary key of the board-->
+              <a href="{% url 'forum-threads' forum.name %}">{{ forum.name }}</a>
               <small class="text-muted d-block">{{ forum.description }}</small>
             </td>
-            <td class="align-middle">0</td>
-            <td class="align-middle">0</td>
+            <td class="align-middle">{{ forum.get_posts_count }}</td>
+            <td class="align-middle">{{ forum.thread.count }}</td>
             <td></td>
           </tr>
         {% endfor %}

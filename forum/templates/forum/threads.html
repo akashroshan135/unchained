@@ -7,11 +7,12 @@
 {% block heading %}
   <ol class="breadcrumb my-4">
     <li class="breadcrumb-item active">
-      <a href="{% url 'forum-list' %}">Forums</a> / {{ forum.name }}
-    </li>      
+      <a href="{% url 'forum-list' %}">Forums</a>
+    </li>
+    <li class="breadcrumb-item active">{{ forum.name }}</li>      
   </ol> 
   <div class="mb-4">
-    <a href="{% url 'forum-threads-new' forum.pk %}" class="btn btn-primary">New topic</a>
+    <a href="{% url 'forum-threads-new' forum.name %}" class="btn btn-primary">New thread</a>
   </div>
 {% endblock %}
 

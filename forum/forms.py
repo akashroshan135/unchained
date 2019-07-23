@@ -5,4 +5,4 @@ class NewThreadForm(forms.ModelForm):
 
     class Meta:
         model = Thread
-        fields = ['name']
+        fields = ['name', 'desc']
