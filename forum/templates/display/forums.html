@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Forums
+{% endblock %}
+
+{% block heading %}
+    <ol class="breadcrumb my-4">
+      <li class="breadcrumb-item active">Forums</li>  
+    </ol>
+{% endblock %}
+
+{% block content %}
+
+
+  <div class="container">
+    <table class="table">Information
+      <thead class="thead-inverse">
+        <tr>
+          <th>Forum Name</th>
+          <th>Posts</th>
+          <th>Threads</th>
+          <th>Last Post</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for forum in admin_forums %}
+          <tr>
+            <td>
+              <a href="{% url 'forum-threads' forum.id %}">{{ forum.name }}</a>
+              <small class="text-muted d-block">{{ forum.description }}</small>
+            </td>
+            <td class="align-middle">{{ forum.get_posts_count }}</td>
+            <td class="align-middle">{{ forum.thread.count }}</td>
+            <td></td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="container">
+    <table class="table">Listings
+      <thead class="thead-inverse">
+        <tr>
+          <th>Forum Name</th>
+          <th>Posts</th>
+          <th>Threads</th>
+          <th>Last Post</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for forum in download_forums %}
+          <tr>
+            <td>
+              <a href="{% url 'forum-threads' forum.id %}">{{ forum.name }}</a>
+              <small class="text-muted d-block">{{ forum.description }}</small>
+            </td>
+            <td class="align-middle">{{ forum.get_posts_count }}</td>
+            <td class="align-middle">{{ forum.thread.count }}</td>
+            <td></td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="container">
+    <table class="table">general
+      <thead class="thead-inverse">
+        <tr>
+          <th>Forum Name</th>
+          <th>Posts</th>
+          <th>Threads</th>
+          <th>Last Post</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for forum in general_forums %}
+          <tr>
+            <td>
+              <a href="{% url 'forum-threads' forum.id %}">{{ forum.name }}</a>
+              <small class="text-muted d-block">{{ forum.description }}</small>
+            </td>
+            <td class="align-middle">{{ forum.get_posts_count }}</td>
+            <td class="align-middle">{{ forum.thread.count }}</td>
+            <td></td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="container">
+    <table class="table">requests
+      <thead class="thead-inverse">
+        <tr>
+          <th>Forum Name</th>
+          <th>Posts</th>
+          <th>Threads</th>
+          <th>Last Post</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for forum in request_forums %}
+          <tr>
+            <td>
+              <a href="{% url 'forum-threads' forum.id %}">{{ forum.name }}</a>
+              <small class="text-muted d-block">{{ forum.description }}</small>
+            </td>
+            <td class="align-middle">{{ forum.get_posts_count }}</td>
+            <td class="align-middle">{{ forum.thread.count }}</td>
+            <td></td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+
+{% endblock content %}

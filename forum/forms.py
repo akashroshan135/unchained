@@ -6,3 +6,5 @@ class NewThreadForm(forms.ModelForm):
     class Meta:
         model = Thread
         fields = ['name', 'desc']
+
+#add new form for posts

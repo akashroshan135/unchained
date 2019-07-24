@@ -1,4 +1,4 @@
-{% extends 'forum/base.html' %}
+{% extends 'base.html' %}
 
 {% block title %}
   {{ forum.name }}
@@ -9,10 +9,14 @@
     <li class="breadcrumb-item active">
       <a href="{% url 'forum-list' %}">Forums</a>
     </li>
+    {% if forum.forum %}
+        <li class="breadcrumb-item active"><a href="{% url 'forum-threads' forum.forum.id %}">{{ forum.forum.name }}</a></li>      
+    {% endif %}
+
     <li class="breadcrumb-item active">{{ forum.name }}</li>      
   </ol> 
   <div class="mb-4">
-    <a href="{% url 'forum-threads-new' forum.name %}" class="btn btn-primary">New thread</a>
+    <a href="{% url 'forum-threads-new' forum.id %}" class="btn btn-primary">New thread</a>
   </div>
 {% endblock %}
 
@@ -30,10 +34,10 @@
       {% for thread in threads %}
         <tr>
           <td>
-            <a href="#">{{ thread.name }}</a>
+            <a href="{% url 'thread-posts' thread.id %}">{{ thread.name }}</a>
             <small class="text-muted d-block">{{ thread.created_user }}</small>
           </td>
-          <td class="align-middle">0</td>
+          <td class="align-middle">{{ thread.get_posts_count }}</td>
           <td></td>
         </tr>
       {% endfor %}

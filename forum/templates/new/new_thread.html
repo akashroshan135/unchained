@@ -1,4 +1,4 @@
-{% extends 'forum/base.html' %}
+{% extends 'base.html' %}
 
 {% block title %}
   New Thread
@@ -7,7 +7,7 @@
 {% block heading %}
   <ol class="breadcrumb my-4">
     <li class="breadcrumb-item"><a href="{% url 'forum-list' %}">Forums</a></li>
-    <li class="breadcrumb-item"><a href="{% url 'forum-threads' forum.name %}">{{ forum.name }}</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'forum-threads' forum.id %}">{{ forum.name }}</a></li>
     <li class="breadcrumb-item active">New Thread</li>
   </ol>
 {% endblock %}
