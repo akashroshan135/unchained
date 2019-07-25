@@ -12,21 +12,21 @@ def about(request):
 
 def forum(request):
     context = {                                                                                                 #contains the context data that is send to the html page
-        'admin_forums'      : Forum.objects.filter(forum_type='A'),                                             #all objects in the Forum table where the 'forum_type' is 'A' is stored in 'admin_forums' variable
-        'download_forums'   : Forum.objects.filter(forum_type='D'),                                             #all objects in the Forum table where the 'forum_type' is 'D' is stored in 'download_forums' variable
-        'general_forums'    : Forum.objects.filter(forum_type='G'),                                             #all objects in the Forum table where the 'forum_type' is 'G' is stored in 'general_forums' variable
-        'request_forums'    : Forum.objects.filter(forum_type='R'),                                             #all objects in the Forum table where the 'forum_type' is 'R' is stored in 'request_forums' variable
+        'admin_forums'      : Forum.objects.filter(forum_type='A').filter(issubforum=False),                    #all objects in the Forum table where the 'forum_type' is 'A' is stored in 'admin_forums' variable. Also filters only the main forums
+        'download_forums'   : Forum.objects.filter(forum_type='D').filter(issubforum=False),                    #all objects in the Forum table where the 'forum_type' is 'D' is stored in 'download_forums' variable. Also filters only the main forums
+        'general_forums'    : Forum.objects.filter(forum_type='G').filter(issubforum=False),                    #all objects in the Forum table where the 'forum_type' is 'G' is stored in 'general_forums' variable. Also filters only the main forums
+        'request_forums'    : Forum.objects.filter(forum_type='R').filter(issubforum=False),                    #all objects in the Forum table where the 'forum_type' is 'R' is stored in 'request_forums' variable. Also filters only the main forums
     }
     return render(request,'display/forums.html', context)                                                       #request to render the 'forums.html' file and sends the context
 
 @login_required                                                                                                 #function is only valid when the user is logged in. Else will redirect to the login page (refer 'settings.py')
 def forum_threads(request, id):                                                                                 #function recieves 'id' as arguement when being called
     
-    subforums_count = Forum.objects.filter(forum__id__contains=id).filter(forum_type='S').count()               #stores the count of forums(subforums) where the forum is the forum id recieved in the args and the 'forum_type' is set to 'S'. Used to check is the forum has any subforums linked to it
+    subforums_count = Forum.objects.filter(forum__id__contains=id).filter(issubforum=True).count()               #stores the count of forums(subforums) where the forum is the forum id recieved in the args and the 'forum_type' is set to 'S'. Used to check is the forum has any subforums linked to it
     if (subforums_count != 0) :                                                                                 #if the 'subforums_count' is more than 0, the block is executed 
         context = {                                                                                             #contains the context data that is send to the html page
             'main_forum'   : Forum.objects.get(id=id),                                                          #uses the 'id' variable from the args to filter required main(parent) forum from the list
-            'sub_forums'   : Forum.objects.filter(forum__id__contains=id).filter(forum_type='S')                #uses the 'id' variable from the args and a filter of 'forum_type' set to 'S' to filter required subforums from the list
+            'sub_forums'   : Forum.objects.filter(forum__id__contains=id).filter(issubforum=True)                #uses the 'id' variable from the args and a filter of 'forum_type' set to 'S' to filter required subforums from the list
         }
         return render(request, 'display/subforums.html', context)                                               #request to render the 'subforums.html' file and sends the context
     

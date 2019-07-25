@@ -33,7 +33,17 @@
           </td>
           <td class="align-middle">{{ forum.get_posts_count }}</td>
           <td class="align-middle">{{ forum.thread.count }}</td>
-          <td></td>
+          <td class="align-middle">
+            {% with post=forum.get_last_post %}
+            <small>
+              <a href="{% url 'thread-posts' post.thread.id %}">
+                {{ post.thread }}
+              </a><br>
+              {{ post }}<br>
+              By {{ post.created_by.username }} at {{ post.created_at }}
+            </small>
+            {% endwith %}
+          </td>          
         </tr>
       {% endfor %}
     </tbody>

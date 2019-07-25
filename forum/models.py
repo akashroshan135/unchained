@@ -16,20 +16,32 @@ class Forum(models.Model):
         ('A', 'Admin'),
         ('D', 'Download'),
         ('G', 'General'),
-        ('R', 'Requests'),
-        ('S', 'Sub Forum')
+        ('R', 'Requests')    
     )                                                                                                                           #creates a list called 'type' with the attributes listed
     forum_type = models.CharField(max_length=1, choices=type)                                                                   #charfield uses the 'type' list
+    issubforum = models.BooleanField(default=False)                                                                             #a boolean field that specifies whether the forum is a subforum or not
     forum = models.ForeignKey('self', on_delete = models.CASCADE, related_name='subforum', blank=True, null=True)               #attaches the Forum table(self) as a foreign key. This is used to link main forum when the create entry is a subforum. Can be set to blank
 
     def __str__(self):                                                                                                          #returns the name of the forum to display in the database
         return self.name
 
+    #the following functions are used for main forums
     def get_posts_count(self):                                                                                                  #fuction to return the total number of posts belonging to the forum
         return Post.objects.filter(thread__forum=self).count()
-
-    def get_last_post(self):                                                                                                    #function to return the last post submitted in the forum. Need to check
+    
+    def get_last_post(self):                                                                                                    #function to return the last post submitted in the forum
         return Post.objects.filter(thread__forum=self).order_by('-created_at').first()
+
+    #the following functions are used for sub forums
+    def get_sub_threads_count(self):                                                                                            #fuction to return the total number of threads belonging to the subforum
+        return Thread.objects.filter(forum__issubforum=True).filter(forum__forum=self).count()
+
+    def get_posts_count_subs(self):                                                                                             #fuction to return the total number of posts belonging to the subforum
+        return Post.objects.filter(thread__forum__forum=self).count()
+
+    def get_last_post_sub(self):                                                                                                #function to return the last post submitted in the subforum
+        return Post.objects.filter(thread__forum__forum=self).order_by('-created_at').first()
+
 
 #contains the threads
 class Thread(models.Model):  
