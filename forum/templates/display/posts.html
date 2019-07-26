@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-  {{ forum.name }}
+  {{ thread.forum.name }} Threads
 {% endblock %}
 
 {% block heading %}
@@ -11,14 +11,14 @@
         <li class="breadcrumb-item active"><a href="{% url 'forum-threads' thread.forum.forum.id %}">{{ thread.forum.forum.name }}</a></li>      
     {% endif %}
     <li class="breadcrumb-item"><a href="{% url 'forum-threads' thread.forum.id %}">{{ thread.forum.name }}</a></li>
-    <li class="breadcrumb-item">new</li>
+    <li class="breadcrumb-item">{{ thread.name }}</li>
   </ol>
 {% endblock %}
 
 {% block content %}
 
   <div class="mb-4">
-    <a href="#" class="btn btn-primary" role="button">Reply</a>
+    <a href="{% url 'thread-posts-new' thread.id %}" class="btn btn-primary" role="button">Reply</a>
   </div>
 
   {% for post in posts %}

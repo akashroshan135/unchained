@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Forum, Thread, Post
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from .forms import NewThreadForm
+from .forms import NewThreadForm, NewPostForm
 
 def home(request):
     return render(request, 'home.html')                                                                         #request to render the about.html file and sends the context
@@ -59,3 +59,18 @@ def new_thread(request, id):                                                    
         else:
             form = NewThreadForm()                                                                              #reloads form. Need to Add message integration
     return render(request, 'new/new_thread.html', {'forum': forum})                                             #request to render the 'new_thread.html' file and sends the 'forum' variable as 'forum'
+
+@login_required                                                                                                 #function is only valid when the user is logged in. Else will redirect to the login page (refer 'settings.py')
+def new_post(request, id):                                                                                      #function recieves 'id' as arguement when being called
+    thread = get_object_or_404(Thread, id=id)                                                                   #stores the current forum in 'forum' variable. Returns 404 if object is missing
+    form = NewPostForm(request.POST)                                                                          #stores the form in 'form' variable
+    if request.method == 'POST':                                                                                #if block is executed is the POST request is recieved. Used to verify that data is recieved to be stored
+        if form.is_valid():                                                                                     #if block is executed only if the form is valid
+            post = form.save(commit=False)                                                                    #saves the form in a variable
+            post.created_by = request.user                                                                  #set 'created_user' field to current user logged in
+            post.thread = thread                                                                                #set 'forum' field to current forum
+            post.save()                                                                                       #saves the form in the database
+            return redirect('thread-posts', id=thread.id)                                                       #redirects to 'forum_threads' function with the forum's 'id' as args
+        else:
+            form = NewPostForm()                                                                              #reloads form. Need to Add message integration
+    return render(request, 'new/new_post.html', {'thread': thread, 'forum': thread.forum})                                             #request to render the 'new_thread.html' file and sends the 'forum' variable as 'forum'
