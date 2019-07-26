@@ -23,7 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls, name = 'admin'),
     path('register/', user_views.register, name = 'register'),                                              #the localhost will directly access the 'register' function in the 'views.py' in the 'users' app
     path('profile/', user_views.profile, name = 'profile'),                                                 #the localhost will directly access the 'profile' function in the 'views.py' in the 'users' app
-    path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name = 'login'),         #the localhost will directly access the django's default login view
-    path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name = 'logout'),     #the localhost will directly access the django's default logout view
+    path('login/', auth_views.LoginView.as_view(template_name='login.html'), name = 'login'),               #the localhost will directly access the django's default login view
+    path('logout/', auth_views.LogoutView.as_view(template_name='logout.html'), name = 'logout'),           #the localhost will directly access the django's default logout view
     path('', include('forum.urls')),                                                                        #the localhost will redirect to the 'forum' app urls
 ]
