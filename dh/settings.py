@@ -124,8 +124,12 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-CRISPY_TEMPLATE_PACK = 'bootstrap4' #bootstrap template crispy uses
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')            #joins the directory of the project with 'media' folder to set media root. Works on all operating systems
 
-LOGIN_REDIRECT_URL = 'forum-list'   #sets the login redirect to the 'forum-list' page after login. May change to homepage after it is created
+MEDIA_URL = '/media/'                                   #the media url used for access in html templates
 
-LOGIN_URL = 'login'                 #sets the 'login' page as default when user tries to illegally access profile or other hidden pages
+CRISPY_TEMPLATE_PACK = 'bootstrap4'                     #bootstrap template crispy-form uses
+
+LOGIN_REDIRECT_URL = 'forum-list'                       #sets the login redirect to the 'forum-list' page after login. May change to homepage after it is created
+
+LOGIN_URL = 'login'                                     #sets the 'login' page as default when user tries to illegally access profile or other hidden pages

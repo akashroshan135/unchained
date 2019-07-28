@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import UserRegisterForm
+from django.contrib.auth.models import User
 
 def register(request):
     if request.method == 'POST':                                                                                        #if block is executed is the POST request is recieved. Used to verify that data is recieved to be stored
@@ -15,5 +16,8 @@ def register(request):
     return render(request, 'register.html', {'form': form})                                                             #request to render the 'register.html' file and sends the 'form' variable as 'form'
 
 @login_required                                                                                                         #function is only valid when the user is logged in. Else will redirect to the login page (refer 'settings.py')
-def profile(request):
-    return render(request, 'profile.html')                                                                              #request to render the 'profile.html' file
+def profile(request, username):
+    context = {
+        'user': User.objects.get(username=username)
+    }
+    return render(request, 'profile.html', context)                                                                              #request to render the 'profile.html' file
