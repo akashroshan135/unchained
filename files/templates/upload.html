@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}
+  Upload
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="file" name="file">
+    <button type="submit" class="btn btn-success">Upload</button>
+  </form>
+
+  {% if url %}
+    <p>File uploaded at: <a href="{{ url }}">{{ url }}</a></p>
+  {% endif %}
+
+{% endblock content %}
