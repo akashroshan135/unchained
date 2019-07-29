@@ -6,7 +6,8 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('upload', views.upload, name = 'upload'),                                              #the 'home' function in the views.py is called when localhost is called
+    path('upload', views.upload, name = 'files-upload'),                                              #the 'home' function in the views.py is called when localhost is called
+    path('view', views.file_view, name = 'files-view'),                                              #the 'home' function in the views.py is called when localhost is called
 ]
 
 if settings.DEBUG:
