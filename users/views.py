@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import UserRegisterForm
 from django.contrib.auth.models import User
+from forum.models import Post
 
 def register(request):
     if request.method == 'POST':                                                                                        #if block is executed is the POST request is recieved. Used to verify that data is recieved to be stored
@@ -18,6 +19,7 @@ def register(request):
 @login_required                                                                                                         #function is only valid when the user is logged in. Else will redirect to the login page (refer 'settings.py')
 def profile(request, username):
     context = {
-        'user': User.objects.get(username=username)
+        'user'  : User.objects.get(username=username),                                                                  #sends the current user object in the context
+        'posts' : Post.objects.filter(created_by__username__contains=username)                                          #sends all the post objects created by the user  
     }
-    return render(request, 'profile.html', context)                                                                              #request to render the 'profile.html' file
+    return render(request, 'profile.html', context)                                                                     #request to render the 'profile.html' file

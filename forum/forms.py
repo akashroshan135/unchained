@@ -5,7 +5,7 @@ class NewThreadForm(forms.ModelForm):
 
     class Meta:
         model = Thread
-        fields = ['name', 'desc']
+        fields = ['name']
 
 class NewPostForm(forms.ModelForm):
 

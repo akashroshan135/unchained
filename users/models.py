@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)                                         #imports the users models
-    profile_pic = models.ImageField(default='default.jpg', upload_to='profile_pics')                    #creates an image field with 'default.jpg' when no user profile pic is set. Uploads to the 'profile_pics' folder in 'media'
+    profile_pic = models.ImageField(default='profile_pics/default.jpg', upload_to='profile_pics')                    #creates an image field with 'default.jpg' when no user profile pic is set. Uploads to the 'profile_pics' folder in 'media'
     created_at = models.DateTimeField(auto_now_add=True)                                                #sets to the current time and date when the user is created
 
     def __str__(self):
