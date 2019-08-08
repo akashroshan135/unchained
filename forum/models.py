@@ -57,6 +57,10 @@ class Thread(models.Model):
 
     def get_posts_count(self):                                                                                                  #fuction to return the total number of posts belonging to the thread
         return Post.objects.filter(thread=self).count()
+    
+    def get_last_post(self):                                                                                                    #function to return the last post submitted in the forum
+        return Post.objects.filter(thread=self).order_by('-created_at').first()
+
 
 #contains the posts
 class Post(models.Model):

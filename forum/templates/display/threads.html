@@ -35,10 +35,22 @@
         <tr>
           <td>
             <a href="{% url 'thread-posts' thread.id %}">{{ thread.name }}</a>
-            <small class="text-muted d-block">{{ thread.created_user }}</small>
+            <small class="text-muted d-block">Created by <a href="{% url 'profile' thread.created_user.username %}">{{ thread.created_user.username }}</a></small>
           </td>
           <td class="align-middle">{{ thread.get_posts_count }}</td>
-          <td></td>
+          <td>{% with post=thread.get_last_post %}
+                {% if post.thread == thread %}
+                  <small>
+                    <a href="{% url 'thread-posts' post.thread.id %}">
+                      {{ post.subject }}
+                    </a><br>
+                    {{ post }}<br>
+                    By <a href="{% url 'profile' post.created_by.username %}">{{ post.created_by.username }}</a> at {{ post.created_at }}
+                  </small>
+                {% else %}
+                  No Posts
+                {% endif %}
+              {% endwith %}</td>
         </tr>
       {% endfor %}
     </tbody>

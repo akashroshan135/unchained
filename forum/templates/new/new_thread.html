@@ -7,6 +7,9 @@
 {% block heading %}
   <ol class="breadcrumb my-4">
     <li class="breadcrumb-item"><a href="{% url 'forum-list' %}">Forums</a></li>
+    {% if forum.forum %}
+        <li class="breadcrumb-item active"><a href="{% url 'forum-threads' forum.forum.id %}">{{ forum.forum.name }}</a></li>      
+    {% endif %}
     <li class="breadcrumb-item"><a href="{% url 'forum-threads' forum.id %}">{{ forum.name }}</a></li>
     <li class="breadcrumb-item active">New Thread</li>
   </ol>

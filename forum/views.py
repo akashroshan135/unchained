@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Forum, Thread, Post
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from .forms import NewThreadForm, NewPostForm
+from .forms import NewThreadForm, NewPostForm, NewThreadPostForm
 
 def home(request):
     return render(request, 'home.html')                                                                         #request to render the about.html file and sends the context
@@ -47,7 +47,7 @@ def thread_posts(request, id):
 def new_thread(request, id):                                                                                    #function recieves 'id' as arguement when being called
     forum = get_object_or_404(Forum, id=id)                                                                     #stores the current forum in 'forum' variable. Returns 404 if object is missing
     threadform = NewThreadForm(request.POST)                                                                    #stores the thread form in 'threadform' variable
-    postform = NewPostForm(request.POST)                                                                        #stores the post form in 'postform' variable
+    postform = NewThreadPostForm(request.POST)                                                                        #stores the post form in 'postform' variable
     if request.method == 'POST':                                                                                #if block is executed is the POST request is recieved. Used to verify that data is recieved to be stored
         if threadform.is_valid() and postform.is_valid():                                                       #if block is executed only if both forms are valid
             
@@ -65,7 +65,7 @@ def new_thread(request, id):                                                    
             return redirect('forum-threads', id=forum.id)                                                       #redirects to 'forum_threads' function with the forum's 'id' as args
         else:
             threadform = NewThreadForm(request.POST)                                                            #stores the thread form in 'threadform' variable. Resets the form
-            postforrm = NewPostForm(request.POST)                                                               #stores the post form in 'postform' variable. Resets the form
+            postforrm = NewThreadPostForm(request.POST)                                                               #stores the post form in 'postform' variable. Resets the form
     return render(request, 'new/new_thread.html', {'forum': forum})                                             #request to render the 'new_thread.html' file and sends the 'forum' variable as 'forum'
 
 @login_required                                                                                                 #function is only valid when the user is logged in. Else will redirect to the login page (refer 'settings.py')

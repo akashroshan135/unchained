@@ -11,4 +11,10 @@ class NewPostForm(forms.ModelForm):
 
     class Meta:
         model = Post
+        fields = ['subject', 'post']
+
+class NewThreadPostForm(forms.ModelForm):
+
+    class Meta:
+        model = Post
         fields = ['post']
