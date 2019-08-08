@@ -7,23 +7,24 @@
 {% endblock %}
 
 {% block content %}
-
-
+{% if files %}
   {% for file in files %}
     <div class="card mb-2">
       <div class="card-body p-3">
         <div class="row">
-          <div class="col-2">
-            <img class="w-100 rounded" src="{{ file.user.profile.profile_pic.url }}" alt="{{ file.user.username }}"><br>
-          </div>
           <div class="col-10">
-            Name of the file = {{ file.name }}
-            Uploaded by = {{ file.user }}
+            Name of the file = {{ file.name }}<br>
+            Uploaded by = {{ file.user }}<br>
             file = {{ file.data }}
           </div>
         </div>
       </div>
     </div>
   {% endfor %}
-
+{% else %}
+  <h3>You have not uploaded any files</h3>
+  <a href="{% url 'files-upload' %}">
+    <input type="button" class="btn btn-success">Upload now</button>
+  </a>
+{% endif %}
 {% endblock content %}

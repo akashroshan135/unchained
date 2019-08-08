@@ -1,8 +1,8 @@
 from django import forms
-from .models import Files
+from .models import File
 from django.contrib.auth.models import User
 
 class NewFileForm(forms.ModelForm):
     class Meta:
-        model = Files
+        model = File
         fields = ['name', 'data']
