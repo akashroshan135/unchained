@@ -23,6 +23,13 @@
       <label for="id_desc">Description</label>
       <textarea class="form-control" id="id_desc" name="desc"></textarea>
     </div>
+    {% if forum.issubforum %}
+      <div class="form-group">
+        <label for="id_file">File Link</label>
+        <input type="text" class="form-control" id="id_file" name="link">
+        <small class="text-muted">Haven't uploaded any files. Upload <a href="{% url 'files-upload' %}">here</a></small>
+      </div>
+    {% endif %}
     <button type="submit" class="btn btn-success">Post</button>
   </form>
 {% endblock %}

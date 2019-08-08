@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import NewFileForm
-from .models import File
+from .models import File_Object
 
 @login_required
 def upload(request):
@@ -22,6 +22,6 @@ def upload(request):
 @login_required
 def file_view(request):
     context = {
-        'files'     :   File.objects.get(user=request.user)
+        'files'     :   File_Object.objects.filter(user=request.user)
     }
     return render(request, 'file_list.html', context)

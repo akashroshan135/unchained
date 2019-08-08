@@ -14,8 +14,14 @@
         <div class="row">
           <div class="col-10">
             Name of the file = {{ file.name }}<br>
-            Uploaded by = {{ file.user }}<br>
-            file = {{ file.data }}
+            Uploaded on = {{ file.uploaded_on }}<br><br>
+            <div class="mb-4">
+              <a href="{{ file.data.url }}" class="btn btn-primary" role="button">Download</a>
+              <input type="text" style="display:none" value="{{ file.data.url }}" id="link">
+              <button class="btn btn-primary" onclick="copyclip()">
+              Copy to clipboard
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -27,4 +33,22 @@
     <input type="button" class="btn btn-success">Upload now</button>
   </a>
 {% endif %}
+
+  <script>
+    function copyclip() {
+        /* Get the text field */
+        var copyText = document.getElementById("link");
+    
+        /* Select the text field */
+        copyText.select();
+    
+        /* Copy the text inside the text field */
+        document.execCommand("copy");
+    
+        /* Alert the copied text */
+        alert("Copied the text: " + copyText.value);
+    } 
+    </script>
+
+
 {% endblock content %}
