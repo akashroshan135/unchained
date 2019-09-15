@@ -14,18 +14,34 @@
         <div class="row">
           <div class="col-10">
             Name of the file = {{ file.name }}<br>
-            Uploaded on = {{ file.uploaded_on }}<br><br>
+            Uploaded on = {{ file.uploaded_on }}
+            <textarea id="{{ file.name }}" style="position: absolute; left: -999em;">{{ file.data.url }}</textarea><br><br>
             <div class="mb-4">
-              <a href="{{ file.data.url }}" class="btn btn-primary" role="button">Download</a>
-              <input type="text" style="display:none" value="{{ file.data.url }}" id="link">
-              <button class="btn btn-primary" onclick="copyclip()">
-              Copy to clipboard
-              </button>
+              <a href="{{ file.data.url }}" download class="btn btn-primary" role="button">Download</a>
+              <button class="btn btn-primary" onclick="copyclip('{{ file.name }}');">Copy to clipboard</button>
             </div>
           </div>
         </div>
       </div>
     </div>
+    
+    <script>
+      function copyclip(link) {
+        /* Get the text field */
+        var copyText = document.getElementById(link);
+
+        /* Select the text field */
+        copyText.select();
+        copyText.setSelectionRange(0, 99999); /*For mobile devices*/
+
+        /* Copy the text inside the text field */
+        document.execCommand("copy");
+
+        /* Alert the copied text */
+        alert("File Link has been copied to clipboard: " + copyText.value);
+      }  
+    </script>
+
   {% endfor %}
 {% else %}
   <h3>You have not uploaded any files</h3>
@@ -33,22 +49,5 @@
     <input type="button" class="btn btn-success">Upload now</button>
   </a>
 {% endif %}
-
-  <script>
-    function copyclip() {
-        /* Get the text field */
-        var copyText = document.getElementById("link");
-    
-        /* Select the text field */
-        copyText.select();
-    
-        /* Copy the text inside the text field */
-        document.execCommand("copy");
-    
-        /* Alert the copied text */
-        alert("Copied the text: " + copyText.value);
-    } 
-    </script>
-
 
 {% endblock content %}
