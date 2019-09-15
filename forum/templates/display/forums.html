@@ -37,10 +37,10 @@
                 {% if post.thread.forum == forum %}
                   <small>
                     <a href="{% url 'thread-posts' post.thread.id %}">
-                      {{ post.thread }}
+                      {{ post.subject }}
                     </a><br>
                     {{ post }}<br>
-                    By {{ post.created_by.username }} at {{ post.created_at }}
+                    By <a href="{% url 'profile' post.created_by.username %}">{{ post.created_by.username }}</a> at {{ post.created_at }}
                   </small>
                 {% else %}
                   No Posts
@@ -77,10 +77,10 @@
                 {% if post.thread.forum == forum %}
                   <small>
                     <a href="{% url 'thread-posts' post.thread.id %}">
-                      {{ post.thread }}
+                      {{ post.subject }}
                     </a><br>
                     {{ post }}<br>
-                    By {{ post.created_by.username }} at {{ post.created_at }}
+                    By <a href="{% url 'profile' post.created_by.username %}">{{ post.created_by.username }}</a> at {{ post.created_at }}
                   </small>
                 {% else %}
                   No Posts
@@ -117,10 +117,10 @@
                 {% if post.thread.forum == forum %}
                   <small>
                     <a href="{% url 'thread-posts' post.thread.id %}">
-                      {{ post.thread }}
+                      {{ post.subject }}
                     </a><br>
                     {{ post }}<br>
-                    By {{ post.created_by.username }} at {{ post.created_at }}
+                    By <a href="{% url 'profile' post.created_by.username %}">{{ post.created_by.username }}</a> at {{ post.created_at }}
                   </small>
                 {% else %}
                   No Posts
@@ -157,10 +157,10 @@
                 {% if post.thread.forum == forum %}
                   <small>
                     <a href="{% url 'thread-posts' post.thread.id %}">
-                      {{ post.thread }}
+                      {{ post.subject }}
                     </a><br>
                     {{ post }}<br>
-                    By {{ post.created_by.username }} at {{ post.created_at }}
+                    By <a href="{% url 'profile' post.created_by.username %}">{{ post.created_by.username }}</a> at {{ post.created_at }}
                   </small>
                 {% else %}
                   No Posts

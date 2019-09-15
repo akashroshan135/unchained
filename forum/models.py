@@ -47,7 +47,7 @@ class Forum(models.Model):
 class Thread(models.Model):  
     id = models.AutoField(primary_key=True)                                                                                     #primary key 'id'
     name = models.CharField(max_length=255)                                                                                     #name of the thread
-    desc = models.TextField(max_length=4000)                                                                                    #description of the thread. Acts as the first post in the thread
+    link = models.CharField(max_length=255, blank=True)                                                                          #download link of the file that is used only in download thread posts. Can be set to blank
     last_updated = models.DateTimeField(auto_now_add=True)                                                                      #sets to the current time and date when the thread is updated
     forum = models.ForeignKey(Forum, on_delete = models.CASCADE, related_name='thread')                                         #attaches the Forum table as a foreign key. models.CASCADE deletes the thread when the forum is deleted
     created_user = models.ForeignKey(User, on_delete = models.SET(get_sentinel_user), related_name='thread')                    #attaches the User table as a foreign key. models.SET sets the user to 'deleted' to keep the post even after the user account is deleted
@@ -57,12 +57,16 @@ class Thread(models.Model):
 
     def get_posts_count(self):                                                                                                  #fuction to return the total number of posts belonging to the thread
         return Post.objects.filter(thread=self).count()
+    
+    def get_last_post(self):                                                                                                    #function to return the last post submitted in the forum
+        return Post.objects.filter(thread=self).order_by('-created_at').first()
+
 
 #contains the posts
 class Post(models.Model):
     id = models.AutoField(primary_key=True)                                                                                     #primary key 'id'
+    subject = models.CharField(max_length=255)                                                                                  #subject of the post. Similar to thread field
     post = models.TextField(max_length=4000)                                                                                    #posted message
-    link = models.URLField(max_length=255, blank=True)                                                                          #download link of the file that is used only in download thread posts. Can be set to blank
     thread = models.ForeignKey(Thread, on_delete = models.CASCADE, related_name='posts')                                        #attaches the Thread table as a foreign key. models.CASCADE deletes the post when the thread is deleted
     created_at = models.DateTimeField(auto_now_add=True)                                                                        #sets to the current time and date when the post is created
     updated_at = models.DateTimeField(null=True)                                                                                #sets to the current time and date when the post is updated. May need implementation
