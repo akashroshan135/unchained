@@ -12,6 +12,7 @@
     {% endif %}
     <li class="breadcrumb-item"><a href="{% url 'forum-threads' thread.forum.id %}">{{ thread.forum.name }}</a></li>
     <li class="breadcrumb-item"><a href="{% url 'thread-posts' thread.id %}">{{ thread.name }}</a></li>
+    <li class="breadcrumb-item">New Post<li>
   </ol>
 {% endblock %}
 
@@ -23,7 +24,7 @@
       <input type="text" class="form-control" id="id_subject" name="subject" value="Re: {{ thread.name }}">
     </div>
     <div class="form-group">
-      <label for="id_post">New Post</label>
+      <label for="id_post">Message</label>
       <textarea class="form-control" id="id_post" name="post"></textarea>
     </div>
     <button type="submit" class="btn btn-success">Post</button>
