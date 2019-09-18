@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}
+  List
+{% endblock %}
+
+{% block content %}
+{% if files %}
+  {% for file in files %}
+    <div class="card mb-2">
+      <div class="card-body p-3">
+        <div class="row">
+          <div class="col-10">
+            Name of the file = {{ file.name }}<br>
+            Uploaded on = {{ file.uploaded_on }}
+            <textarea id="{{ file.name }}" style="position: absolute; left: -999em;">{{ file.data.url }}</textarea><br><br>
+            <div class="mb-4">
+              <table>
+                <tr>
+                  <td>
+                    <a href="{{ file.data.url }}" download class="btn btn-primary" role="button">Download</a>
+                  </td>
+                  <td>
+                    <button class="btn btn-primary" onclick="copyclip('{{ file.name }}');">Copy to clipboard</button>
+                  </td>
+                  <td>
+                    <form method="post" action="{% url 'delete-file' file.pk %}">
+                      {% csrf_token %}
+                      <button type="submit" class="btn btn-danger">Delete File</button>
+                    </form>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <script>
+      function copyclip(link) {
+        /* Get the text field */
+        var copyText = document.getElementById(link);
+
+        /* Select the text field */
+        copyText.select();
+        copyText.setSelectionRange(0, 99999); /*For mobile devices*/
+
+        /* Copy the text inside the text field */
+        document.execCommand("copy");
+
+        /* Alert the copied text */
+        alert("File Link has been copied to clipboard: " + copyText.value);
+      }  
+    </script>
+
+  {% endfor %}
+{% else %}
+  <h3>You have not uploaded any files</h3>
+  <a href="{% url 'files-upload' %}">
+    <button class="btn btn-primary">Upload now</button>
+  </a>
+{% endif %}
+
+{% endblock content %}

@@ -74,7 +74,7 @@
             <td class="align-middle">{{ forum.get_sub_threads_count }}</td>
             <td class="align-middle">
               {% with post=forum.get_last_post_sub %}
-                {% if post.thread.forum == forum %}
+                {% if post.thread.forum.forum == forum %}
                   <small>
                     <a href="{% url 'thread-posts' post.thread.id %}">
                       {{ post.subject }}

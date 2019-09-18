@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     'forum.apps.ForumConfig', # includes the installed app 'forum'
     'users.apps.UsersConfig', # includes the installed app 'users'
+    'files.apps.FilesConfig', # includes the installed app 'files'
     'crispy_forms',           # uses crispy forms to modify display of the register page. Refer to the 'register.html' in 'users' app to see how to use
 
 ]

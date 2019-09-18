@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}
+  Upload
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="id_name">Name</label>
+      <input type="text" class="form-control" id="id_name" name="name">
+    </div>
+    <div class="form-group">
+      <label for="id_data">Upload file</label>
+      <input type="file" class="form-control" style="padding-bottom: 45px;" id="id_data" name="data">
+    </div>
+    <button type="submit" class="btn btn-success">Upload</button>
+  </form>
+  <p>File list at: <a href="{% url 'files-view' %}">here</a></p>
+{% endblock content %}
