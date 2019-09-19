@@ -6,12 +6,16 @@ Requirements:
 - django-crispy-forms (used for forms)
 - pillow (library used for images in python)
 
-To run project, run the following commands in the project's directory
+To run project, run the following commands in the project's directory to create the database
 ```
 py manage.py makemigrations forum
 py manage.py makemigrations files
-py manage.py makemigrations user
+py manage.py makemigrations users
 py manage.py migrate
+```
+Use the following command to run the server
+```
+py manage.py runserver
 ```
 To create an admin account, create a regular account using the website's register page. Open the shell using the following command
 ```
@@ -25,4 +29,13 @@ user.is_staff = True
 user.is_admin = True
 user.is_superuser = True
 user.save()
+```
+If there are errors in the migrations, run the migration and migrate command for each individual app in the project
+```
+py manage.py makemigrations forum
+py manage.py migrate forum
+py manage.py makemigrations files
+py manage.py migrate files
+py manage.py makemigrations users
+py manage.py migrate users
 ```
