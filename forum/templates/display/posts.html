@@ -44,11 +44,11 @@
               </div>
             </div>
             {{ post.post }}
-            {% if thread.link %}              
+            {% ifchanged thread.link %}  
               <br><br><center>
               <a href="{{ thread.link }}" download class="btn btn-primary" role="button">Download</a>
               </center>
-            {% endif %}
+            {% endifchanged %}
             <!--
             {% if post.created_by == user %}
               <div class="mt-3">

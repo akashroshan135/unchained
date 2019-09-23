@@ -1,9 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User     #imports the users
-from django.contrib.auth import get_user_model  #used to replace deleted users with 'deleted' tag. Need to test
+from django.contrib.auth import get_user_model  #used to replace deleted users with 'deleted' tag
 from django.utils.text import Truncator
 
-#used to replace deleted users with 'deleted' tag. Need to test
+#used to replace deleted users with 'deleted' tag
 def get_sentinel_user():
     return get_user_model().objects.get_or_create(username='deleted')[0]
 
@@ -47,7 +47,7 @@ class Forum(models.Model):
 class Thread(models.Model):  
     id = models.AutoField(primary_key=True)                                                                                     #primary key 'id'
     name = models.CharField(max_length=255)                                                                                     #name of the thread
-    link = models.CharField(max_length=255, blank=True)                                                                          #download link of the file that is used only in download thread posts. Can be set to blank
+    link = models.CharField(max_length=255, blank=True)                                                                         #download link of the file that is used only in download thread posts. Can be set to blank
     last_updated = models.DateTimeField(auto_now_add=True)                                                                      #sets to the current time and date when the thread is updated
     forum = models.ForeignKey(Forum, on_delete = models.CASCADE, related_name='thread')                                         #attaches the Forum table as a foreign key. models.CASCADE deletes the thread when the forum is deleted
     created_user = models.ForeignKey(User, on_delete = models.SET(get_sentinel_user), related_name='thread')                    #attaches the User table as a foreign key. models.SET sets the user to 'deleted' to keep the post even after the user account is deleted

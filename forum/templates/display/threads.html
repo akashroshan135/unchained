@@ -36,6 +36,7 @@
           <td>
             <a href="{% url 'thread-posts' thread.id %}">{{ thread.name }}</a>
             <small class="text-muted d-block">Created by <a href="{% url 'profile' thread.created_user.username %}">{{ thread.created_user.username }}</a></small>
+            <small class="text-muted d-block">Created on {{ thread.last_updated }}</a></small>
           </td>
           <td class="align-middle">{{ thread.get_posts_count }}</td>
           <td>{% with post=thread.get_last_post %}

@@ -45,7 +45,7 @@
                                 {% if request.user.is_superuser %}
                                     <a class="dropdown-item" href="{% url 'admin:index' %}">Admin Page</a>
                                 {% endif %}
-                                <a class="dropdown-item" href="#">Change password</a>
+                                <!--<a class="dropdown-item" href="#">Change password</a>-->
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{% url 'logout' %}">Log out</a>
                             </div>
