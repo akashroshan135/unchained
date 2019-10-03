@@ -2,6 +2,8 @@
 A web project for college. A project that for data sharing and forum discussion boards.
 Allows users to create a user account. Users can use the forums and upload and share data on the forums
 
+Further project development moved to [CyrilSL's fork](https://github.com/CyrilSL/unchained)
+
 Requirements:
 - django-crispy-forms (used for forms)
 - pillow (library used for images in python)
